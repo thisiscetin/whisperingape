@@ -1,0 +1,30 @@
+require:
+  - rubocop-rspec
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+
+  Exclude:
+    - db/migrate/**/*
+    - db/schema.rb
+    - config/**/*
+    - script/**/*
+    - bin/**/*
+    - app/channels/**/*
+    - app/jobs/**/*
+    - Gemfile
+    - Rakefile
+    - config.ru
+    - Guardfile
+
+Style/Documentation:
+  Enabled: false
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/services/**/*'
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 6
