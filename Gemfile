@@ -9,6 +9,8 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem "selenium-webdriver"
 gem "webdrivers"
+gem "sidekiq", "~> 6.0"
+gem "redis", "~> 4.8"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
