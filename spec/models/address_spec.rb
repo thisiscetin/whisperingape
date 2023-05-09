@@ -33,6 +33,11 @@ RSpec.describe Address do
     expect(address).not_to be_valid
   end
 
+  it 'is not valid with a valid destination, but different host' do
+    address.destination = 'https://www.notnationalgeo.com/content.html'
+    expect(address).not_to be_valid
+  end
+
   it 'is not valid when there is a record with same destination' do
     address.save
     a2 = build(:address)
