@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :address do
     association :ape
 
-    destination { 'https://www.nationalgeographic.com/' }
+    destination { 'https://www.nationalgeographic.com/content.html' }
     visited { false }
     processing { false }
   end

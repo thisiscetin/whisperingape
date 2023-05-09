@@ -53,7 +53,7 @@ RSpec.describe Address do
   it 'returns closer record as nearest with same size embedding when multiple ones present' do
     address.embedding = second_vector
     address.save
-    create(:address, destination: 'https://xyz.com', embedding: first_vector)
+    create(:address, destination: "#{address.ape.host}/somecontent.html", embedding: first_vector)
 
     expect(build(:address, embedding: second_vector).nearest).to eq(address)
   end
