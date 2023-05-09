@@ -1,9 +1,7 @@
 class CreateAddresses < ActiveRecord::Migration[7.0]
   def change
-    enable_extension 'vector'
-
     create_table :addresses do |t|
-      t.string :destination, null: false
+      t.string :destination, null: false, index: { unique: true }
       
       # post crawl
       t.text :content
@@ -15,9 +13,5 @@ class CreateAddresses < ActiveRecord::Migration[7.0]
       t.references :ape, null: false
       t.timestamps
     end
-
-    execute <<-SQL
-      ALTER TABLE addresses ADD embedding vector(1536);
-    SQL
   end
 end

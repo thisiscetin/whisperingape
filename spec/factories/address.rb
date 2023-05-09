@@ -18,7 +18,6 @@ FactoryBot.define do
 
     content { 'some dummy content' }
     md5sum { '5cdb221ab5436a0cd7942840e48ef03d' }
-
-    # embeding will be attached in the service
+    embedding { (0...1536).map { |x| x } }
   end
 end

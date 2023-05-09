@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_08_124035) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_09_065418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
 
-# Could not dump table "addresses" because of following StandardError
-#   Unknown type 'vector(1536)' for column 'embedding'
+  create_table "addresses", force: :cascade do |t|
+    t.string "destination", null: false
+    t.text "content"
+    t.string "md5sum"
+    t.boolean "visited", default: false, null: false
+    t.boolean "processing", default: false, null: false
+    t.bigint "ape_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.vector "embedding", limit: 1536
+    t.index ["ape_id"], name: "index_addresses_on_ape_id"
+    t.index ["destination"], name: "index_addresses_on_destination", unique: true
+  end
 
   create_table "apes", force: :cascade do |t|
     t.string "host", null: false
