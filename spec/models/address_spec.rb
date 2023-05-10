@@ -4,13 +4,13 @@ require 'rails_helper'
 
 RSpec.describe Address do
   let(:address) { build(:address) }
-  let(:address_processing) { build(:address_processing) }
+  let(:address_deactivated) { build(:address_deactivated) }
   let(:address_processed) { build(:address_processed) }
   let(:first_vector) { (0...1536).map { |x| x } }
   let(:second_vector) { (0...1536).map { |x| x + 1 } }
 
   it 'is valid a factory' do
-    expect([address, address_processing, address_processed]).to all be_valid
+    expect([address, address_deactivated, address_processed]).to all be_valid
   end
 
   it 'is not valid without an ape' do

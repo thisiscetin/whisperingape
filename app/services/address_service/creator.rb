@@ -12,8 +12,7 @@ module AddressService
         {
           ape: @ape,
           destination: @destination,
-          visited: false,
-          processing: false
+          active: true
         }
       )
     end

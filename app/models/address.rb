@@ -9,6 +9,8 @@ class Address < ApplicationRecord
   validates :destination, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
   validate :ape_host
 
+  after_create :fetch_content
+
   def nearest
     nearest_neighbors(:embedding, distance: 'euclidean').first
   end
@@ -20,5 +22,9 @@ class Address < ApplicationRecord
     return if destination.include?(ape.host)
 
     errors.add :destination, 'needs to be under ape host'
+  end
+
+  def fetch_content
+    ContentFetcherJob.perform_later(id)
   end
 end

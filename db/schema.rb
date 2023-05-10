@@ -19,8 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_065418) do
     t.string "destination", null: false
     t.text "content"
     t.string "md5sum"
-    t.boolean "visited", default: false, null: false
-    t.boolean "processing", default: false, null: false
+    t.boolean "active", default: true, null: false
     t.bigint "ape_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

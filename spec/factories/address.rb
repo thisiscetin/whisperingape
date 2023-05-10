@@ -5,17 +5,14 @@ FactoryBot.define do
     association :ape
 
     destination { 'https://www.nationalgeographic.com/content.html' }
-    visited { false }
-    processing { false }
+    active { true }
   end
 
-  factory :address_processing, parent: :address do
-    processing { true }
+  factory :address_deactivated, parent: :address do
+    active { false }
   end
 
   factory :address_processed, parent: :address do
-    visited { true }
-
     content { 'some dummy content' }
     md5sum { '5cdb221ab5436a0cd7942840e48ef03d' }
     embedding { (0...1536).map { |x| x } }
