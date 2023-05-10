@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-# remove visited, processing from address
-
 module AddressService
   class Fetcher < ApplicationService
     def initialize(address_id)
       @address = Address.includes(:ape).find(address_id)
     end
 
+    # if md5ischanging and embedding is present, or embedding is empty - perform an embedding job as well
     def call
       result = ScrapingService::Extract.call(@address.destination, @address.ape.host, 'body')
 

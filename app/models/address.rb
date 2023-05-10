@@ -10,6 +10,7 @@ class Address < ApplicationRecord
   validate :ape_host
 
   after_create :fetch_content
+  after_save :embed_content
 
   def nearest
     nearest_neighbors(:embedding, distance: 'euclidean').first
@@ -26,5 +27,11 @@ class Address < ApplicationRecord
 
   def fetch_content
     ContentFetcherJob.perform_later(id)
+  end
+
+  def embed_content
+    # we only call OpenAI when there is a change in the content
+    # so even if this is invoked mistakenly it won't be a problem
+    ContentEmbedderJob.perform_later(id) if saved_changes[:md5sum] && content.present?
   end
 end
