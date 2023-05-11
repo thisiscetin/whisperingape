@@ -32,6 +32,6 @@ class Address < ApplicationRecord
   def embed_content
     # we only call OpenAI when there is a change in the content
     # so even if this is invoked mistakenly it won't be a problem
-    ContentEmbedderJob.perform_later(id) if saved_changes[:md5sum] && content.present?
+    AddressEmbedderJob.perform_later(id) if saved_changes[:md5sum] && content.present?
   end
 end
