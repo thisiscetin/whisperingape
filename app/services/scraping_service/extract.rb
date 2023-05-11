@@ -41,7 +41,7 @@ module ScrapingService
 
     def collect_if_matching(elem)
       href = elem.attribute('href')
-      return unless href.include?(@base)
+      return unless href&.include?(@base)
 
       @links.add(href)
     end
