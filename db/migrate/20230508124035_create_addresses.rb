@@ -9,7 +9,7 @@ class CreateAddresses < ActiveRecord::Migration[7.0]
 
       t.boolean :active, null: false, default: true
 
-      t.references :ape, null: false
+      t.references :ape, null: false, foreign_key: true
       t.timestamps
     end
   end

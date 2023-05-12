@@ -17,7 +17,11 @@ module AddressService
     private
 
     def create_adresses(ape, links)
-      links.each do |link|
+      cleaned_links = links
+                      .map { |link| link.split('#').first }
+                      .uniq
+
+      cleaned_links.each do |link|
         AddressService::Creator.call(ape, link) unless Address.find_by(destination: link)
       end
     end
