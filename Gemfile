@@ -7,7 +7,8 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
-gem "selenium-webdriver"
+gem "nokogiri"
+gem "httparty"
 gem "webdrivers"
 gem "sidekiq", "~> 6.0"
 gem "redis", "~> 4.8"
