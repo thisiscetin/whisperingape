@@ -24,10 +24,12 @@ module ScrapingService
       driver.navigate.to @url
       driver.find_elements(:tag_name, 'a').each { |elem| collect_if_matching(elem) }
 
-      ScrapingResult.new(
+      result = ScrapingResult.new(
         driver.find_element(:tag_name, @tag).text,
         @links
       )
+      driver.close
+      result
     end
 
     private

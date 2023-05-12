@@ -12,7 +12,7 @@ module OpenaiService
         parameters: {
           model: 'gpt-3.5-turbo',
           messages: @messages,
-          temperature: 0.7
+          temperature: 0
         }
       )
     end

@@ -19,6 +19,8 @@ module AddressService
     def create_adresses(ape, links)
       cleaned_links = links
                       .map { |link| link.split('#').first }
+                      .map { |link| link.split('?').first }
+                      .map { |link| link.last == '/' ? link.chop : link }
                       .uniq
 
       cleaned_links.each do |link|

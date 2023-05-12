@@ -4,9 +4,7 @@ class ChatController < ApplicationController
   def reply
     reply = ChatService::Replier.call(p_params[:question])
 
-    render json: {
-      reply:
-    }
+    render plain: reply
   end
 
   private
