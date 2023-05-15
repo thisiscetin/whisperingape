@@ -10,53 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_12_171335) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_13_125817) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
 
-  create_table "addresses", force: :cascade do |t|
-    t.string "destination", null: false
-    t.text "content"
-    t.string "md5sum"
-    t.boolean "active", default: true, null: false
-    t.bigint "ape_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.vector "embedding", limit: 1536
-    t.index ["ape_id"], name: "index_addresses_on_ape_id"
-    t.index ["destination"], name: "index_addresses_on_destination", unique: true
-  end
-
   create_table "apes", force: :cascade do |t|
-    t.string "host", null: false
-    t.integer "refresh_in_hours", default: 24, null: false
-    t.boolean "follow_up", default: true, null: false
-    t.boolean "active", default: true, null: false
-    t.datetime "last_run"
+    t.string "domain", null: false
+    t.boolean "discovery", default: true, null: false
+    t.boolean "subdomain_followup", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["domain"], name: "index_apes_on_domain", unique: true
   end
 
-  create_table "contents", force: :cascade do |t|
-    t.string "first_seen", null: false
-    t.string "md5sum", null: false
-    t.text "markup", null: false
-    t.vector "embedding", limit: 1536
-    t.boolean "active", default: true, null: false
+  create_table "embeddings", force: :cascade do |t|
+    t.string "destination", null: false
+    t.string "md5sum_gpt_content", null: false
+    t.vector "v", limit: 1536
+    t.bigint "scrape_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destination"], name: "index_embeddings_on_destination", unique: true
+    t.index ["md5sum_gpt_content"], name: "index_embeddings_on_md5sum_gpt_content", unique: true
+    t.index ["scrape_id"], name: "index_embeddings_on_scrape_id"
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.string "destination", null: false
     t.bigint "ape_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ape_id"], name: "index_contents_on_ape_id"
-    t.index ["md5sum"], name: "index_contents_on_md5sum", unique: true
+    t.index ["ape_id"], name: "index_links_on_ape_id"
+    t.index ["destination"], name: "index_links_on_destination", unique: true
   end
 
-  create_table "visits", force: :cascade do |t|
-    t.string "destination", null: false
+  create_table "scrapes", force: :cascade do |t|
+    t.text "content", null: false
+    t.text "gpt_content"
+    t.string "md5sum", null: false
+    t.bigint "ape_id"
+    t.bigint "link_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["destination"], name: "index_visits_on_destination", unique: true
+    t.index ["ape_id"], name: "index_scrapes_on_ape_id"
+    t.index ["link_id"], name: "index_scrapes_on_link_id"
+    t.index ["md5sum"], name: "index_scrapes_on_md5sum", unique: true
   end
 
-  add_foreign_key "addresses", "apes"
+  add_foreign_key "embeddings", "scrapes"
+  add_foreign_key "links", "apes"
+  add_foreign_key "scrapes", "apes"
+  add_foreign_key "scrapes", "links"
 end

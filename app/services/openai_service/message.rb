@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ChatService
+module OpenaiService
   class Message
     include ActiveModel::Serializers::JSON
 

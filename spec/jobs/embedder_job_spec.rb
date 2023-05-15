@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe ContentFetcherJob do
+RSpec.describe EmbedderJob do
   pending "add some examples to (or delete) #{__FILE__}"
 end

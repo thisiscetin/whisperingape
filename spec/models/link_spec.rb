@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe MessageEmbedderJob do
+RSpec.describe Link do
   pending "add some examples to (or delete) #{__FILE__}"
 end
