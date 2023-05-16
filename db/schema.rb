@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_13_125817) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_15_121515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_13_125817) do
     t.bigint "scrape_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true
     t.index ["destination"], name: "index_embeddings_on_destination", unique: true
     t.index ["md5sum_gpt_content"], name: "index_embeddings_on_md5sum_gpt_content", unique: true
     t.index ["scrape_id"], name: "index_embeddings_on_scrape_id"

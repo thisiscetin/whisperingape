@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   post "/reply", to: 'chat#reply'
+  get "/counts", to: 'metrics#counts'
+  get "/contents", to: 'metrics#contents'
+  get "/links", to: 'metrics#links'
 end

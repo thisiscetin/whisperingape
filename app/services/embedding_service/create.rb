@@ -13,7 +13,8 @@ module EmbeddingService
         {
           scrape_id: @scrape.id,
           destination: @scrape.link.destination,
-          md5sum_gpt_content:
+          md5sum_gpt_content:,
+          active: @scrape.gpt_content.split.count > 50
         }
       )
     end

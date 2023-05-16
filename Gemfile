@@ -14,6 +14,7 @@ gem "sidekiq", "~> 6.0"
 gem "redis", "~> 4.8"
 gem "neighbor"
 gem "ruby-openai"
+gem "rack-cors"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

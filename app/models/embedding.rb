@@ -12,6 +12,6 @@ class Embedding < ApplicationRecord
   private
 
   def embed_content
-    EmbedderJob.perform_later(id)
+    EmbedderJob.perform_later(id) if active
   end
 end
