@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MetricsController < ApplicationController
   def counts
     render json: {
@@ -13,14 +15,10 @@ class MetricsController < ApplicationController
                     .where.not(gpt_content: nil)
                     .order(created_at: :desc)
 
-    contents = []
     box = Struct.new(:id, :content, :gpt_content, :link, :active)
-
-    scrapes.each do |s|
-      active = s.embedding ? s.embedding.active : false
-      contents << box.new(s.id, s.content, s.gpt_content, s.link.destination, active)
+    render json: scrapes.map do |s|
+      box.new(s.id, s.content, s.gpt_content, s.link.destination, s.embedding ? s.embedding.active : false)
     end
-    render json: contents
   end
 
   def links
